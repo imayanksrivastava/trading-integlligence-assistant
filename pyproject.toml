@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "technology-intelligence-harness"
+version = "0.1.0"
+description = "Technology Intelligence Agent Harness"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ag-ui-protocol>=1.0.0",
+    "fastapi>=0.145.0",
+    "openai-agents",
+    "python-dotenv",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[project.scripts]
+tech-intel = "tech_intel.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tech_intel"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
